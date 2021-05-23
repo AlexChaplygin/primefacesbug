@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <title>PrimeFaces Test</title>
+        <h:outputScript name="test.js" />
+    </h:head>
+    <h:body>
+
+        <h1>#{testView.string}</h1>
+        <h:form id="frmTest">
+            <p:dataTable paginator="true" rows="100" paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {DateFormat}"
+                         currentPageReportTemplate="Total {totalRecords} ({currentPage} of {totalPages})"
+                         reflow="true" styleClass="break-words"
+                         rowIndexVar="rowIndex"
+                         var="product" value="#{dtBasicView.products}"
+                         selection="#{dtBasicView.selectedProducts}"
+                         rowKey="#{product.id}" rowExpandMode="single">
+                <f:facet name="header">
+                    Expand rows to see detailed information
+                </f:facet>
+                <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                <p:column style="width:2rem">
+                    <p:rowToggler/>
+                </p:column>
+
+                <p:column headerText="Name">
+                    <h:outputText value="#{product.name}"/>
+                </p:column>
+
+                <p:column headerText="Image">
+                    <p:graphicImage name="demo/images/product/#{product.image}" styleClass="p-shadow-2" width="100"/>
+                </p:column>
+
+                <p:column headerText="Price">
+                    <h:outputText value="$#{product.price}"/>
+                </p:column>
+
+                <p:column headerText="Category">
+                    <h:outputText value="#{product.category}"/>
+                </p:column>
+
+                <p:column headerText="Reviews">
+                    <h:outputText value="#{product.name}"/>
+                </p:column>
+
+                <p:rowExpansion>
+                    <div class="product">
+                        <div class="product-list-item">
+                            <div class="product-list-detail">
+                                <div class="product-name">#{product.name}</div>
+                                <h5>AutoResize</h5>
+                                <p:inputTextarea rows="6" cols="33"/>
+                            </div>
+                        </div>
+                    </div>
+                </p:rowExpansion>
+            </p:dataTable>
+        </h:form>
+
+    </h:body>
+</html>
